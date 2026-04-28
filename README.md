@@ -70,4 +70,3 @@ docker stop SafeShare
 ```shell
 docker rm SafeShare
 ```
-

@@ -22,7 +22,7 @@ if (!file_exists($filepath) || !is_file($filepath)) {
     exit;
 }
 
-// Détection du type MIME
+// Détection du type MIME du fichier
 $finfo = new finfo(FILEINFO_MIME_TYPE);
 $mimeType = $finfo->file($filepath) ?: 'application/octet-stream';
 
@@ -33,4 +33,3 @@ header('Cache-Control: no-cache, must-revalidate');
 
 readfile($filepath);
 exit;
-

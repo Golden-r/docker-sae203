@@ -1,61 +1,102 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file-input');
+function isPageReload()
+{
+    const navEntries = typeof performance !== 'undefined' && performance.getEntriesByType ? performance.getEntriesByType('navigation') : [];
+    if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+        return true;
+    }
+    return typeof performance !== 'undefined' && performance.navigation && performance.navigation.type === 1;
+}
+
+document.addEventListener('DOMContentLoaded', () =>
+{
+    // Forcer la reconnexion sur un refresh en invalidant le cache Basic Auth du navigateur
+    if (sessionStorage.getItem('force_relogin'))
+    {
+        sessionStorage.removeItem('force_relogin');
+    }
+    /*else if (isPageReload())
+    {
+        sessionStorage.setItem('force_relogin', '1');
+        // Envoyer des identifiants invalides pour écraser ceux mis en cache par le navigateur
+        fetch('check_auth.php',
+        {
+            headers:{ 'Authorization': 'Basic ' + btoa('logout:logout') }
+        }).catch(() => {}).then(() =>
+        {
+            location.reload();
+        });
+
+        return;
+    }*/
+
+    const dropZone     = document.getElementById('drop-zone')    ;
+    const fileInput    = document.getElementById('file-input')   ;
     const uploadResult = document.getElementById('upload-result');
-    const fileList = document.getElementById('file-list');
-    const authStatus = document.getElementById('auth-status');
+    const fileList     = document.getElementById('file-list')    ;
+    const authStatus   = document.getElementById('auth-status')  ;
 
     let isAuthenticated = false;
 
     // Load available files on page load
-    loadFiles();
+    chargerFichiers();
 
     // Drag & drop events
-    if (dropZone) {
+    if (dropZone)
+    {
         dropZone.addEventListener('click', () => fileInput.click());
 
-        dropZone.addEventListener('dragover', (e) => {
+        dropZone.addEventListener('dragover', (e) =>
+        {
             e.preventDefault();
             dropZone.classList.add('dragover');
         });
 
-        dropZone.addEventListener('dragleave', () => {
+        dropZone.addEventListener('dragleave', () =>
+        {
             dropZone.classList.remove('dragover');
         });
 
-        dropZone.addEventListener('drop', (e) => {
+        dropZone.addEventListener('drop', (e) =>
+        {
             e.preventDefault();
             dropZone.classList.remove('dragover');
             const files = e.dataTransfer.files;
-            if (files.length > 0) {
+            if (files.length > 0)
+            {
                 uploadFile(files[0]);
             }
         });
     }
 
-    if (fileInput) {
-        fileInput.addEventListener('change', () => {
+    if (fileInput)
+    {
+        fileInput.addEventListener('change', () =>
+        {
             if (fileInput.files.length > 0) {
                 uploadFile(fileInput.files[0]);
             }
         });
     }
 
-    async function uploadFile(file) {
+    async function uploadFile(file)
+    {
         uploadResult.innerHTML = '<p class="info">Envoi en cours...</p>';
 
         const formData = new FormData();
         formData.append('file', file);
 
-        try {
-            const response = await fetch('upload.php', {
+        try
+        {
+            const response = await fetch('upload.php',
+            {
                 method: 'POST',
                 body: formData
             });
 
             const data = await response.json();
 
-            if (data.success) {
+            if (data.success)
+            {
                 uploadResult.innerHTML = `
                     <div class="success-box">
                         <p><strong>Fichier envoyé avec succès !</strong></p>
@@ -66,30 +107,39 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-                loadFiles(); // Refresh file list
-            } else {
+                chargerFichiers(); // Refresh file list
+            }
+            else
+            {
                 uploadResult.innerHTML = `<p class="error">Erreur : ${data.error || 'Échec de l\'envoi'}</p>`;
             }
-        } catch (err) {
+        }
+        catch (err)
+        {
             uploadResult.innerHTML = `<p class="error">Erreur réseau : ${err.message}</p>`;
         }
     }
 
-    async function loadFiles() {
+    async function chargerFichiers()
+    {
         if (!fileList) return;
         fileList.innerHTML = '<li>Chargement...</li>';
 
-        try {
-            const response = await fetch('files.php', {
+        try
+        {
+            const response = await fetch('files.php',
+            {
                 credentials: 'include'
             });
             const data = await response.json();
 
-            if (data.success) {
+            if (data.success)
+            {
                 isAuthenticated = data.authenticated;
                 updateAuthStatus();
 
-                if (data.files.length > 0) {
+                if (data.files.length > 0)
+                {
                     fileList.innerHTML = '';
                     data.files.forEach(file => {
                         const sizeStr = formatBytes(file.size);
@@ -97,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         li.className = 'file-item';
 
                         if (isAuthenticated && file.url) {
-                            // Authentifié : lien de téléchargement + bouton supprimer
+                            // rayan: ça si on est authentifié;;; lien de téléchargement + bouton supprimer
                             li.innerHTML = `
                                 <div class="file-info">
                                     <a href="${file.url}" title="Télécharger ${file.name}">
@@ -109,8 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     🗑️ Supprimer
                                 </button>
                             `;
-                        } else {
-                            // Non authentifié : nom sans lien
+                        }
+                        else
+                        {
+                            // rayan: non authentifié;;; nom sans lien
                             li.innerHTML = `
                                 <div class="file-info">
                                     <span class="file-name">📄 ${file.name}</span>
@@ -125,29 +177,39 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     // Attacher les événements de suppression
-                    document.querySelectorAll('.delete-btn').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.delete-btn').forEach(btn =>
+                    {
+                        btn.addEventListener('click', (e) =>
+                        {
                             const filename = e.target.dataset.file;
                             deleteFile(filename);
                         });
                     });
-                } else {
+                }
+                else
+                    {
                     fileList.innerHTML = '<li>Aucun fichier disponible pour le moment.</li>';
                 }
-            } else {
+            }
+            else
+            {
                 fileList.innerHTML = '<li>Erreur lors du chargement des fichiers.</li>';
             }
-        } catch (err) {
-            fileList.innerHTML = `<li class="error">Impossible de charger la liste des fichiers.</li>`;
+        }
+        catch (err)
+        {
+            fileList.innerHTML = `<li class="error">Impossible de charger la liste des fichiers. :(</li>`;
         }
     }
 
-    async function deleteFile(filename) {
+    async function deleteFile(filename)
+    {
         if (!confirm(`Êtes-vous sûr de vouloir supprimer "${filename}" ?`)) {
             return;
         }
 
-        try {
+        try
+        {
             const response = await fetch('delete.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -155,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ file: filename })
             });
 
-            if (response.status === 401) {
+            if (response.status === 401)
+            {
                 alert('Vous devez être connecté pour supprimer un fichier.');
                 promptLogin();
                 return;
@@ -164,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.success) {
-                loadFiles(); // Refresh list
+                chargerFichiers(); // Refresh list
             } else {
                 alert('Erreur : ' + (data.error || 'Échec de la suppression'));
             }
@@ -176,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateAuthStatus() {
         if (!authStatus) return;
         if (isAuthenticated) {
-            authStatus.innerHTML = '<span class="auth-badge auth-ok">🔓 Connecté</span>';
+            authStatus.innerHTML = '<span class="auth-badge auth-ok">Connecté</span>';
         } else {
-            authStatus.innerHTML = '<span class="auth-badge auth-ko">🔒 Non connecté</span> <button onclick="promptLogin()" class="small-btn">Se connecter</button>';
+            authStatus.innerHTML = '<span class="auth-badge auth-ko">Non connecté</span> <button onclick="promptLogin()" class="small-btn">Se connecter</button>';
         }
     }
 
@@ -198,13 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.status === 401) {
                     // Le navigateur va afficher la popup d'authentification
                     // Après auth, on recharge la liste
-                    setTimeout(loadFiles, 500);
+                    setTimeout(chargerFichiers, 500);
                 } else if (response.ok) {
-                    loadFiles();
+                    chargerFichiers();
                 }
             })
             .catch(() => {
-                loadFiles();
+                chargerFichiers();
             });
     };
 });

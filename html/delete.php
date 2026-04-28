@@ -40,4 +40,3 @@ if (unlink($filepath)) {
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'error' => 'Échec de la suppression']);
 }
-
