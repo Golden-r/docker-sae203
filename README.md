@@ -11,6 +11,7 @@
 **IUT Le Havre Normandie**
 
 
+
 ## Instructions pour lancer l'application
 
 - Clonez ou téléchargez le dépôt :
@@ -23,12 +24,12 @@ git clone git@github.com:Golden-r/docker-sae203.git
 cd docker-sae203
 ```
 
-- Construisez l'image décrite dans dockerfile avec docker build :
+- Construiser l'image décrite dans dockerfile avec docker build :
  ```shell
 docker build -t sae203-safeshare
 ```
 
-- Lancez le serveur de partage de fichiers  :
+- Lancer le serveur de partage de fichiers  :
 ```shell
 docker run --name SafeShare -d -p 8080:80 sae203-safeshare
 ```
@@ -48,7 +49,11 @@ CONTAINER ID   IMAGE              COMMAND                  CREATED          STAT
 4d3d46d6570d   sae203-safeshare   "apachectl -D FOREGR…"   35 minutes ago   Up 35 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   SafeShare
 ```
 
-- Finalement, arrêtez le conteneur avec la commande suivante (les dernières chiffres sont le code de hachage affiché par docker ps):
+
+
+## Instruction pour arrêter l'application
+
+- Arrêtez le conteneur avec la commande suivante :
 ```shell
 docker stop SafeShare
 ```
@@ -57,3 +62,4 @@ docker stop SafeShare
 ```shell
 docker rm SafeShare
 ```
+
