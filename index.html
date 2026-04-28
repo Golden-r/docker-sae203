@@ -1,92 +1,452 @@
-<html lang="fr"> 
-	<head> 
-		<meta charset="UTF-8"> 
-		<title>projet final SAE 2.03</title> 
-		<link rel="stylesheet" href="stylesheet.css"> 
-	</head> 
-	<body> 
-		
-		<header> 
-			<h1 id = "haut"> SafeShare </h1> 
-			
-			<nav> 
-				<a href = "#quoi"> c'est quoi ? </a> 
-				<a href = "#fonc"> fonctionnalités </a> 
-				<a href = "#expl"> explications des codes </a> 
-			</nav> 
-		</header> 
-		
-		<section> 
-			<h2 id = "quoi"> En quoi consiste notre projet ? </h2> 
-			<p> 
-				Notre projet est un système de dépôt et de partage de fichiers sécurisé. 
-				Les utilisateurs peuvent téléverser des fichiers sur la plateforme de manière simple et rapide, 
-				sans avoir besoin de mot de passe. Une fois déposés, les fichiers sont stockés et restent accessibles via un lien. 
-				<br>
-				<br> 
-				En revanche, la récupération des fichiers est protégée par un mot de passe afin de garantir leur confidentialité. 
-				Seules les personnes disposant du mot de passe associé peuvent accéder au fichier et le télécharger. 
-				<br> 
-				<br> 
-				L’objectif du projet est de proposer une solution légère, efficace et sécurisée pour le partage temporaire ou contrôlé 
-				de fichiers entre utilisateurs. 
-			</p> 
-		</section> 
-		
-		<img src = "images/site.png" alt="capture du site">
-		
-		<section> 
-			<h2 id = "fonc"> Quelles sont les fonctionnalités du projet ? </h2> 
-			
-			<h3> Fonctionnalités abouties </h3> 
-			
-			<p> 
-				Le système permet à un utilisateur de déposer un fichier de manière simple via une interface dédiée. 
-				Lors de l’envoi, le fichier est enregistré sur la plateforme et associé à un identifiant unique, ainsi 
-				qu’à un mot de passe défini au moment du dépôt. 
-				<br> 
-				<br> 
-				Une fois le fichier uploadé, l’utilisateur peut récupérer un lien ou un accès de téléchargement. 
-				Cependant, le téléchargement du fichier n’est pas libre : il est protégé par un mot de passe. 
-				Lors de la tentative d’accès, l’utilisateur doit saisir le mot de passe correct afin de valider le téléchargement. 
-				Sans cette authentification, l’accès au fichier est refusé. 
-				<br> 
-				<br> 
-				Ce fonctionnement permet de gérer indépendamment l’envoi et la récupération des fichiers, tout en ajoutant 
-				une couche de sécurité au moment de l’accès. 
-			</p> 
-			
-			<br>
-			
-			<h3> Fonctionnalités non abouties </h3> 
-			
-			<p> 
-				Certaines fonctionnalités n’ont pas pu être implémentées dans le cadre de ce projet, mais ça 
-				peut être intéressant d'en parler quand même. 
-				<br> 
-				<br> 
-				Nous avions notamment envisagé l’intégration d’une IA capable d’analyser les fichiers déposés afin de 
-				détecter s’ils sont potentiellement malveillants (virus, fichiers corrompus ou contenus suspects). 
-				Ce système permettrait d’ajouter une couche de sécurité supplémentaire avant même le stockage du fichier. 
-				<br> 
-				<br> 
-				De plus, la mise en place d’un système de comptes utilisateurs avait été envisagée. 
-				<br> 
-				<br> 
-				Enfin, la mise en place d’une base de données relationnelle aurait été essentielle pour stocker de manière 
-				sécurisée les informations liées aux utilisateurs et aux fichiers, notamment les identifiants, les mots de 
-				passe et les métadonnées des fichiers déposés. 
-			</p> 
-		</section> 
-		
-		<section> 
-			
-			<h2 id = "expl"> Explications des différents codes </h2> 
-		
-		</section> 
-		
-		<a href = "#haut"> haut de page </a>
-		
-	</body>
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>projet final SAE 2.03</title>
+		<link rel="stylesheet" href="stylesheet.css">
+	</head>
+	<body>
 
+		<header>
+			<h1 id="haut">🗂️ SafeShare</h1>
+			<nav>
+				<a href="#quoi">c'est quoi ?</a>
+				<a href="#fonc">fonctionnalités</a>
+				<a href="#expl">explications des codes</a>
+			</nav>
+		</header>
+
+		<main>
+
+			<!-- ═══ PRÉSENTATION ═══ -->
+			<section>
+				<h2 id="quoi">En quoi consiste notre projet ?</h2>
+				<p>
+					Notre projet est un système de dépôt et de partage de fichiers sécurisé.
+					Les utilisateurs peuvent téléverser des fichiers sur la plateforme de manière simple et rapide,
+					sans avoir besoin de mot de passe. Une fois déposés, les fichiers sont stockés et restent accessibles via un lien.
+				</p>
+				<p>
+					En revanche, la récupération des fichiers est protégée par un mot de passe afin de garantir leur confidentialité.
+					Seules les personnes disposant du mot de passe associé peuvent accéder au fichier et le télécharger.
+				</p>
+				<p>
+					L'objectif du projet est de proposer une solution légère, efficace et sécurisée pour le partage temporaire ou contrôlé
+					de fichiers entre utilisateurs.
+				</p>
+			</section>
+
+			<!-- ═══ CAPTURE ═══ -->
+			<div class="screenshot-block">
+				<img src="images/site.png" alt="capture du site SafeShare">
+			</div>
+
+			<!-- ═══ FONCTIONNALITÉS ═══ -->
+			<section>
+				<h2 id="fonc">Quelles sont les fonctionnalités du projet ?</h2>
+
+				<h3>Fonctionnalités abouties</h3>
+				<ul class="feature-list">
+					<li>Dépôt de fichiers par glisser-déposer ou sélection manuelle, sans authentification requise.</li>
+					<li>Génération automatique d'un nom de fichier aléatoire pour éviter les collisions et protéger la confidentialité.</li>
+					<li>Génération d'un lien de téléchargement sécurisé communiqué à l'utilisateur après le dépôt.</li>
+					<li>Protection du téléchargement par authentification HTTP Basic (login + mot de passe).</li>
+					<li>Liste des fichiers disponibles visible par tous, mais téléchargeable uniquement par les utilisateurs authentifiés.</li>
+					<li>Suppression de fichiers réservée aux utilisateurs connectés.</li>
+				</ul>
+
+				<h3>Fonctionnalités non abouties</h3>
+				<p>
+					Certaines fonctionnalités n'ont pas pu être implémentées dans le cadre de ce projet, mais il est intéressant d'en parler.
+				</p>
+				<p>
+					Nous avions notamment envisagé l'intégration d'une IA capable d'analyser les fichiers déposés afin de
+					détecter s'ils sont potentiellement malveillants (virus, fichiers corrompus ou contenus suspects).
+					Ce système permettrait d'ajouter une couche de sécurité supplémentaire avant même le stockage du fichier.
+				</p>
+				<p>
+					De plus, la mise en place d'un système de comptes utilisateurs avait été envisagée, ainsi qu'une base de données
+					relationnelle pour stocker de manière sécurisée les identifiants, mots de passe et métadonnées des fichiers déposés.
+				</p>
+			</section>
+
+			<!-- ═══ EXPLICATIONS ═══ -->
+			<section>
+				<h2 id="expl">Explications des différents codes</h2>
+				<p>
+					Le projet se compose de plusieurs fichiers aux rôles bien distincts. Voici une explication détaillée
+					de chacun d'eux, de leur fonctionnement et des choix techniques effectués.
+				</p>
+
+				<!-- ──────────────────────────── auth.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">🔐</span>
+						<h4>auth.php</h4>
+						<span class="badge">PHP · Authentification</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce fichier est le <strong>cœur du système de sécurité</strong>. Il centralise toute la logique
+							d'authentification HTTP Basic et est inclus (<code>require_once</code>) dans tous les scripts PHP
+							qui nécessitent une protection.
+						</p>
+						<p>
+							Il définit d'abord les identifiants valides (login et mot de passe), puis expose trois fonctions :
+						</p>
+						<ul class="feature-list">
+							<li><code>getAuthCredentials()</code> — Récupère le login et le mot de passe envoyés par le navigateur, soit via les variables serveur Apache (<code>PHP_AUTH_USER</code> / <code>PHP_AUTH_PW</code>), soit en décodant manuellement l'en-tête HTTP <code>Authorization: Basic …</code> encodé en Base64.</li>
+							<li><code>isAuthenticated()</code> — Compare les identifiants récupérés avec les valeurs attendues. Retourne <code>true</code> si la connexion est valide, <code>false</code> sinon.</li>
+							<li><code>requireAuth()</code> — Force l'authentification : si l'utilisateur n'est pas connecté, envoie un en-tête <code>WWW-Authenticate</code> qui déclenche la popup de connexion du navigateur, puis interrompt l'exécution avec une réponse HTTP 401.</li>
+						</ul>
+
+						<div class="alert alert-info">
+							💡 <strong>HTTP Basic Auth</strong> : le navigateur encode le couple <em>login:mot de passe</em> en Base64 et l'envoie dans chaque requête. Ce mécanisme est natif dans tous les navigateurs, ce qui évite de coder une page de login.
+						</div>
+
+						<pre><code>// Extrait de auth.php
+function getAuthCredentials() {
+    // Méthode 1 : Apache pré-remplit ces variables
+    if (isset($_SERVER['PHP_AUTH_USER'])) {
+        return ['user' => $_SERVER['PHP_AUTH_USER'],
+                'pass' => $_SERVER['PHP_AUTH_PW']];
+    }
+    // Méthode 2 : lecture manuelle du header Authorization
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    if (strpos($authHeader, 'Basic ') === 0) {
+        $credentials = base64_decode(substr($authHeader, 6));
+        list($user, $pass) = explode(':', $credentials, 2);
+        return ['user' => $user, 'pass' => $pass];
+    }
+    return null;
+}</code></pre>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── check_auth.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">✅</span>
+						<h4>check_auth.php</h4>
+						<span class="badge">PHP · Endpoint de vérification</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce fichier est très court mais remplit un rôle précis : il sert de <strong>point de déclenchement</strong>
+							pour la popup d'authentification du navigateur.
+						</p>
+						<p>
+							Quand l'utilisateur clique sur « Se connecter » dans l'interface, le JavaScript envoie une requête vers
+							<code>check_auth.php</code>. Si l'utilisateur n'est pas encore authentifié, <code>requireAuth()</code>
+							renvoie un HTTP 401, ce qui provoque l'affichage de la boîte de dialogue native du navigateur.
+							Une fois les identifiants saisis et validés, le fichier renvoie simplement <code>{"success": true}</code>.
+						</p>
+						<pre><code>// check_auth.php
+require_once 'auth.php';
+requireAuth(); // déclenche la popup si non connecté
+
+header('Content-Type: application/json');
+echo json_encode(['success' => true, 'authenticated' => true]);</code></pre>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── upload.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">📤</span>
+						<h4>upload.php</h4>
+						<span class="badge">PHP · Dépôt de fichiers</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce script gère la <strong>réception et le stockage des fichiers</strong> envoyés par les utilisateurs.
+							Contrairement au téléchargement, l'envoi est intentionnellement <em>public</em> (sans authentification) :
+							n'importe qui peut déposer un fichier sur le serveur.
+						</p>
+						<p>Voici le déroulement complet du traitement :</p>
+						<div class="flow">
+							<span class="flow-step">1. Vérification méthode POST</span>
+							<span class="flow-arrow">→</span>
+							<span class="flow-step">2. Vérification du fichier reçu</span>
+							<span class="flow-arrow">→</span>
+							<span class="flow-step">3. Génération d'un nom aléatoire</span>
+							<span class="flow-arrow">→</span>
+							<span class="flow-step">4. Déplacement vers /files/</span>
+							<span class="flow-arrow">→</span>
+							<span class="flow-step">5. Retour du lien JSON</span>
+						</div>
+
+						<p>
+							La génération du nom de fichier utilise <code>bin2hex(random_bytes(8))</code> : cela produit
+							une chaîne de 16 caractères hexadécimaux totalement aléatoires, à laquelle on ajoute l'extension
+							d'origine. Cela garantit que deux envois du même fichier produisent des liens différents,
+							et empêche de deviner le nom d'un fichier par force brute.
+						</p>
+						<pre><code>// Génération du nom aléatoire
+$randomName = bin2hex(random_bytes(8)) . ($extension ? '.' . $extension : '');
+
+// Déplacement sécurisé du fichier temporaire
+if (move_uploaded_file($file['tmp_name'], $targetPath)) {
+    chmod($targetPath, 0644); // permissions lecture seule pour les autres
+    echo json_encode(['success' => true, 'link' => $downloadLink]);
+}</code></pre>
+
+						<div class="alert alert-warn">
+							⚠️ <strong>Point d'amélioration possible</strong> : dans sa version actuelle, <code>upload.php</code> n'effectue pas de vérification sur le type MIME ou la taille maximale du fichier. En production, il serait indispensable d'ajouter ces contrôles.
+						</div>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── files.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">📋</span>
+						<h4>files.php</h4>
+						<span class="badge">PHP · Listage des fichiers</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce script génère la <strong>liste de tous les fichiers</strong> présents dans le dossier <code>/files/</code>
+							et la retourne au format JSON. Il est interrogé à chaque chargement de la page et après chaque action
+							(dépôt, suppression) pour maintenir l'affichage à jour.
+						</p>
+						<p>
+							Le comportement diffère selon l'état de l'utilisateur :
+						</p>
+						<ul class="feature-list">
+							<li><strong>Utilisateur non connecté</strong> : reçoit uniquement le nom, la taille et la date des fichiers. Aucun lien de téléchargement n'est inclus.</li>
+							<li><strong>Utilisateur authentifié</strong> : reçoit en plus l'URL complète vers <code>download.php</code> et le flag <code>canDelete: true</code>.</li>
+						</ul>
+						<p>
+							La liste est ensuite triée par date décroissante (le fichier le plus récent en premier) grâce à
+							<code>usort()</code> avec une comparaison de chaînes sur le champ <code>date</code>.
+						</p>
+						<pre><code>// Exemple de réponse JSON (utilisateur connecté)
+{
+  "success": true,
+  "authenticated": true,
+  "files": [
+    {
+      "name": "a3f8b2c1d4e5f6a7.pdf",
+      "size": 204800,
+      "date": "2025-06-10 14:22:05",
+      "url": "https://example.com/download.php?file=a3f8b2c1d4e5f6a7.pdf",
+      "canDelete": true
+    }
+  ]
+}</code></pre>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── download.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">📥</span>
+						<h4>download.php</h4>
+						<span class="badge">PHP · Téléchargement sécurisé</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							C'est le fichier le plus important en matière de sécurité : il gère le <strong>téléchargement protégé</strong>
+							des fichiers. Il commence systématiquement par appeler <code>requireAuth()</code>, ce qui garantit qu'aucune
+							donnée n'est transmise sans authentification valide.
+						</p>
+						<p>Étapes du traitement :</p>
+						<ol style="line-height:2">
+							<li>Authentification obligatoire via <code>requireAuth()</code>.</li>
+							<li>Récupération du paramètre <code>?file=</code> dans l'URL.</li>
+							<li>Sanitisation du nom avec <code>basename()</code> pour empêcher les attaques de type <em>path traversal</em> (<code>../../etc/passwd</code> par exemple).</li>
+							<li>Vérification de l'existence du fichier sur le disque.</li>
+							<li>Détection automatique du type MIME via <code>finfo</code>.</li>
+							<li>Envoi des en-têtes HTTP appropriés puis du contenu du fichier.</li>
+						</ol>
+						<pre><code>// Sanitisation du nom (empêche le path traversal)
+$filename = basename($_GET['file']);
+
+// Détection du type MIME
+$finfo    = new finfo(FILEINFO_MIME_TYPE);
+$mimeType = $finfo->file($filepath) ?: 'application/octet-stream';
+
+// En-têtes de téléchargement
+header('Content-Type: ' . $mimeType);
+header('Content-Disposition: attachment; filename="' . $filename . '"');
+header('Content-Length: ' . filesize($filepath));
+readfile($filepath);</code></pre>
+
+						<div class="alert alert-info">
+							💡 <code>Content-Disposition: attachment</code> force le téléchargement plutôt que l'affichage dans le navigateur, quel que soit le type de fichier.
+						</div>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── delete.php ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">🗑️</span>
+						<h4>delete.php</h4>
+						<span class="badge">PHP · Suppression de fichiers</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce script permet de <strong>supprimer définitivement un fichier</strong> du serveur.
+							Comme pour le téléchargement, l'authentification est exigée en première ligne.
+							De plus, seules les requêtes de méthode <code>POST</code> sont acceptées, ce qui empêche
+							une suppression accidentelle via un simple lien cliquable.
+						</p>
+						<p>
+							Le nom du fichier est transmis dans le corps de la requête au format JSON
+							(<code>{ "file": "nom_du_fichier" }</code>), lu grâce à <code>file_get_contents('php://input')</code>
+							et décodé avec <code>json_decode()</code>.
+						</p>
+						<pre><code>// Lecture du corps JSON
+$input    = json_decode(file_get_contents('php://input'), true);
+$filename = basename($input['file'] ?? '');
+$filepath = $filesDir . $filename;
+
+// Suppression si le fichier existe
+if (file_exists($filepath) && unlink($filepath)) {
+    echo json_encode(['success' => true, 'message' => 'Fichier supprimé']);
+}</code></pre>
+
+						<div class="alert alert-danger">
+							🔒 <strong>Sécurité</strong> : comme pour le téléchargement, <code>basename()</code> est utilisé pour éviter qu'un attaquant puisse supprimer des fichiers en dehors du dossier <code>/files/</code> en manipulant le nom (ex. <code>../auth.php</code>).
+						</div>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── app.js ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">⚙️</span>
+						<h4>app.js</h4>
+						<span class="badge">JavaScript · Interface dynamique</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							Ce fichier contient toute la <strong>logique côté client</strong>. Il est exécuté une fois le DOM
+							chargé et orchestre les interactions entre l'utilisateur et les scripts PHP via des requêtes
+							<code>fetch()</code> asynchrones (API Fetch, sans rechargement de page).
+						</p>
+
+						<h3 style="margin-top:16px">Dépôt de fichiers</h3>
+						<p>
+							Le dépôt est géré via deux mécanismes : un clic sur la zone (qui ouvre le sélecteur de fichiers)
+							et le glisser-déposer (<em>drag &amp; drop</em>). Les événements <code>dragover</code>, <code>dragleave</code>
+							et <code>drop</code> ajoutent/retirent une classe CSS pour l'effet visuel. La fonction <code>uploadFile()</code>
+							envoie ensuite le fichier via un <code>FormData</code> en POST vers <code>upload.php</code>.
+						</p>
+
+						<h3>Chargement dynamique de la liste (<code>chargerFichiers</code>)</h3>
+						<p>
+							Cette fonction est appelée au chargement de la page et après chaque action. Elle interroge
+							<code>files.php</code> et construit dynamiquement le HTML de la liste. Elle adapte l'affichage
+							selon l'état d'authentification retourné par le serveur :
+						</p>
+						<ul class="feature-list">
+							<li>Si connecté : affiche un lien de téléchargement cliquable + un bouton « Supprimer ».</li>
+							<li>Si non connecté : affiche le nom sans lien + un bouton « 🔒 Connexion ».</li>
+						</ul>
+
+						<h3>Authentification (<code>promptLogin</code>)</h3>
+						<p>
+							En cliquant sur « Se connecter », le JS envoie une requête à <code>check_auth.php</code>.
+							Si la réponse est 401, le navigateur affiche automatiquement sa popup de connexion native.
+							Après validation, <code>chargerFichiers()</code> est rappelée pour actualiser la liste.
+						</p>
+
+						<pre><code>// Envoi du fichier (extrait)
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch('upload.php', { method: 'POST', body: formData });
+    const data     = await response.json();
+
+    if (data.success) {
+        // Affichage du lien + rafraîchissement de la liste
+        chargerFichiers();
+    }
+}</code></pre>
+
+						<h3>Formatage des tailles (<code>formatBytes</code>)</h3>
+						<p>
+							Une petite fonction utilitaire convertit les tailles brutes en octets en une représentation
+							lisible (Ko, Mo, Go) avec deux décimales.
+						</p>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── index.html + stylesheet.css ──────────────────────────── -->
+				<div class="file-card">
+					<div class="file-card-header">
+						<span class="icon">🖼️</span>
+						<h4>index.html &amp; stylesheet.css</h4>
+						<span class="badge">HTML · CSS · Interface</span>
+					</div>
+					<div class="file-card-body">
+						<p>
+							<code>index.html</code> est la <strong>page unique</strong> de l'application. Elle définit la structure
+							HTML : une barre d'état d'authentification (<code>#auth-status</code>), une zone de dépôt
+							(<code>#drop-zone</code>), une zone de résultat d'envoi (<code>#upload-result</code>) et une liste
+							de fichiers (<code>#file-list</code>). Ces éléments sont manipulés dynamiquement par <code>app.js</code>.
+						</p>
+						<p>
+							<code>stylesheet.css</code> gère l'ensemble du style visuel : mise en page, couleurs, effets de survol
+							sur les boutons, style de la zone de dépôt (avec animation au <em>drag</em>), badges d'état de connexion
+							(vert / rouge) et affichage en ligne des éléments de la liste de fichiers.
+						</p>
+						<div class="alert alert-info">
+							💡 La page est entièrement <strong>mono-fichier HTML</strong> sans framework : aucune dépendance externe, ce qui la rend très légère et facile à déployer.
+						</div>
+					</div>
+				</div>
+
+				<!-- ──────────────────────────── Schéma global ──────────────────────────── -->
+				<h3>Schéma global du fonctionnement</h3>
+				<div class="flow" style="flex-direction:column; align-items:flex-start; gap:10px">
+					<div class="flow">
+						<span class="flow-step">Utilisateur dépose un fichier</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">app.js → upload.php</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">Stockage dans /files/</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">Lien retourné</span>
+					</div>
+					<div class="flow">
+						<span class="flow-step">Utilisateur clique « Se connecter »</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">check_auth.php (401)</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">Popup navigateur</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">auth.php valide</span>
+					</div>
+					<div class="flow">
+						<span class="flow-step">Utilisateur télécharge</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">download.php</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">requireAuth()</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">Envoi du fichier</span>
+					</div>
+					<div class="flow">
+						<span class="flow-step">Utilisateur supprime</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">delete.php</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">requireAuth()</span>
+						<span class="flow-arrow">→</span>
+						<span class="flow-step">unlink() du fichier</span>
+					</div>
+				</div>
+
+			</section>
+
+			<a href="#haut" class="back-top">↑ Haut de page</a>
+
+		</main>
+
+	</body>
 </html>
