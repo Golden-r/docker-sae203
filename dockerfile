@@ -5,15 +5,13 @@ FROM debian:latest
 RUN apt update && apt install -y apache2 apache2-utils
 
 # Copier les fichiers de l'hôte vers l'image
-COPY index.html /var/www/html/index.html
+COPY ./html/ /var/www/html/
 COPY files/ /var/www/html/files/
 
 # création du system de sécurité
 # le login = sae203
 # le password = crokeur2pied67
 RUN htpasswd -bc /etc/apache2/.htpasswd sae203 crokeur2pied67
-
-COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 
 
 # Exposer le port 80
