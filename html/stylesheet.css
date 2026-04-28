@@ -61,3 +61,106 @@ button {
 button:hover {
     background-color: #c92ac9;
 }
+
+/* Upload zone */
+.upload-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.drop-zone {
+    border: 3px dashed #2ea6dd;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    color: #555;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    background: #f0f8ff;
+}
+
+.drop-zone:hover {
+    background: #e0f2fe;
+    border-color: #1f5f8b;
+}
+
+.drop-zone.dragover {
+    background: #d0eaff;
+    border-color: #c92ac9;
+}
+
+.drop-zone p {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Upload result */
+#upload-result {
+    margin-top: 20px;
+}
+
+.success-box {
+    background: #e6ffed;
+    border: 1px solid #34d058;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.link-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.link-box a {
+    word-break: break-all;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.link-box button {
+    padding: 8px 14px;
+    font-size: 13px;
+}
+
+.info {
+    color: #0e4275;
+    font-weight: bold;
+}
+
+.error {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+/* File list meta */
+.meta {
+    display: block;
+    color: #777;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Layout helpers */
+.main-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.download-section, .login-info {
+    margin-bottom: 30px;
+}
+
+/* File list item layout */
+#file-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

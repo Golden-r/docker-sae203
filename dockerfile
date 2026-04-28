@@ -2,11 +2,14 @@
 FROM debian:latest
 
 # Installer des services et des packages
-RUN apt update && apt install -y apache2 apache2-utils
+RUN apt update && apt install -y apache2 apache2-utils php libapache2-mod-php
 
 # Copier les fichiers de l'hôte vers l'image
 COPY ./html/       /var/www/html/
 COPY ./html/files/ /var/www/html/files/
+
+# Rendre le dossier files writable pour Apache
+RUN chown -R www-data:www-data /var/www/html/files && chmod -R 775 /var/www/html/files
 
 # création du system de sécurité
 # le login = sae203

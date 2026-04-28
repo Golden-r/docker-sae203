@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8">
 		<title>projet final SAE 2.03</title>
@@ -7,45 +8,42 @@
 
 	<body>
 
-		<h1><center>Bienvenue sur le serveur de stockage de fichiers sécurisé</center></h1>
+		<h1 class="main-title">Bienvenue sur le serveur de stockage de fichiers sécurisé</h1>
 
-		<br>
+		<!-- ZONE DE DEPOT -->
+		<section class="upload-section">
+			<h2>Déposer un fichier</h2>
+			<div id="drop-zone" class="drop-zone">
+				<p>📁 Glissez-déposez un fichier ici ou cliquez pour sélectionner</p>
+				<input type="file" id="file-input" hidden>
+			</div>
+			<div id="upload-result"></div>
+		</section>
 
-		<!-- Bouton dépôt fichier -->
-		<div style="text-align:right;">
-			<button onclick="alert('Fonction de dépôt à implémenter côté serveur')">
-				Déposer un fichier
-			</button>
-		</div>
+		<!-- ZONE DE TELECHARGEMENT -->
+		<section class="download-section">
+			<h2>Zone de téléchargement sécurisée</h2>
 
-		<br>
+			<p>
+				Sur ce serveur, vous pouvez consulter et télécharger différents fichiers (documents, images, etc.).
+				L’accès à certains fichiers est protégé par un système d’authentification.
+			</p>
 
-		<h2>Zone de téléchargement sécurisée</h2>
-
-		<p>
-			Sur ce serveur, vous pouvez consulter et télécharger différents fichiers (documents, images, etc.).
-			L’accès à certains fichiers est protégé par un système d’authentification.
-		</p>
-
-		<br>
-
-		<!-- SECTION TELECHARGEMENT -->
-		<h3>Fichiers disponibles</h3>
-
-		<ul>
-			<li><a href="files/doc1.pdf" download> Télécharger Document 1</a></li>
-			<li><a href="files/image.png" download> Télécharger Image</a></li>
-		</ul>
-
-		<br>
+			<h3>Fichiers disponibles</h3>
+			<ul id="file-list">
+				<li>Chargement...</li>
+			</ul>
+		</section>
 
 		<!-- RAPPEL LOGIN -->
-		<h3>Rappel d’accès (SAE)</h3>
+		<section class="login-info">
+			<h3>Rappel d’accès (SAE)</h3>
+			<p>
+				<strong>LOGIN :</strong> sae203 <br>
+				<strong>PASSWORD :</strong> crokeur2pied67
+			</p>
+		</section>
 
-		<p>
-			<strong>LOGIN :</strong> sae203 <br>
-			<strong>PASSWORD :</strong> crokeur2pied67
-		</p>
-
+		<script src="app.js"></script>
 	</body>
 </html>
