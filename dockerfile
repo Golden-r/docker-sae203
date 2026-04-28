@@ -5,8 +5,8 @@ FROM debian:latest
 RUN apt update && apt install -y apache2 apache2-utils
 
 # Copier les fichiers de l'hôte vers l'image
-COPY ./html/ /var/www/html/
-COPY files/ /var/www/html/files/
+COPY ./html/       /var/www/html/
+COPY ./html/files/ /var/www/html/files/
 
 # création du system de sécurité
 # le login = sae203
