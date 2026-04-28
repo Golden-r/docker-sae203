@@ -13,52 +13,47 @@
 
 ## Instructions pour lancer l'application
 
-- Vérifiez si docker est installé :
+- Clonez ou téléchargez le dépôt :
 ```shell
-docker --version
+git clone git@github.com:Golden-r/docker-sae203.git
 ```
 
-- Cloner le référentiel :
+- Rendez vous dans le dossier du projet :
+```shell
+cd docker-sae203
+```
+
+- Construisez l'image décrite dans dockerfile avec docker build :
  ```shell
-git clone git@github.com:juanluck/exempleDockerfile.git
+docker build -t sae203-safeshare
 ```
 
-- Aller au référentiel :
+- Lancez le serveur de partage de fichiers  :
 ```shell
-cd exempleDockerfile
-```
-
-- Construisez l'image décrite dans dockerfile avec docker build : 
-```shell
-docker build -t <choisir-un-nom-pour-l'image> .
-```
-
-- Lancer le serveur web :
-```shell
-docker run -d -p 8080:80 <nom-de-l'image-choisie>
+docker run --name SafeShare -d -p 8080:80 sae203-safeshare
 ```
 
 - Vérifier que l'application est en cours d'exécution. Pour ce faire, ouvrez un navigateur et tapez ```localhost:8080```
+
 
 - Vérifier que le conteneur associé est actif :
 ```shell
 docker ps
 ```
 
+
 - La sortie de ```docker ps``` doit être similaire à :
 ```shell
-CONTAINER ID   IMAGE          COMMAND              CREATED          STATUS          PORTS                                   NAMES
-b8f8f406b03c   httpd-juanlu   "httpd-foreground"   30 minutes ago   Up 30 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp   quirky_tesla
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+4d3d46d6570d   sae203-safeshare   "apachectl -D FOREGR…"   35 minutes ago   Up 35 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   SafeShare
 ```
 
 - Finalement, arrêtez le conteneur avec la commande suivante (les dernières chiffres sont le code de hachage affiché par docker ps):
 ```shell
-docker stop b8f8f406b03c
+docker stop SafeShare
 ```
 
 - Encore, si on souhaite supprimer le conteneur, on peut taper :
 ```shell
-docker rm b8f8f406b03c
+docker rm SafeShare
 ```
-
-**NOTE :** Au lieu du code de hachage, on peut toujours taper le nom du conteneur. Dans le cas d'exemple ce nom est ```quirky_tesla```
