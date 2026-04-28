@@ -1,7 +1,0 @@
-- [x] Update dockerfile (install PHP + set permissions)
-- [x] Create html/upload.php (file upload backend)
-- [x] Create html/files.php (list files backend)
-- [x] Create html/app.js (frontend JS: upload + download)
-- [x] Update html/index.html (integrate JS and new UI)
-- [x] Update html/stylesheet.css (new styles)
-- [ ] Test build (docker build required)
