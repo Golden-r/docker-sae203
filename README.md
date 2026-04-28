@@ -3,10 +3,13 @@
 **Équipe V2 :**
 
 <div>
-- Rayan   AZAANOUNE   B2
-- Kyle    FOREST      B2
-- Alexis  WEY-RACADOT B2
-- Gabriel BEAUFILS    B2
+
+<ul>
+  <li><pre>Rayan   AZAANOUNE   B2</pre>pre></li>
+  <li><pre>Kyle    FOREST      B2</pre>pre></li>
+  <li><pre>Alexis  WEY-RACADOT B2</pre>pre></li>
+  <li><pre>Gabriel BEAUFILS    B2</pre>pre></li>
+</ul>
 </div>
 
 
