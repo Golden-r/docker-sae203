@@ -34,7 +34,7 @@ if (move_uploaded_file($file['tmp_name'], $targetPath)) {
 
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
-    $downloadLink = $protocol . '://' . $host . dirname($_SERVER['SCRIPT_NAME']) . '/files/' . $randomName;
+    $downloadLink = $protocol . '://' . $host . dirname($_SERVER['SCRIPT_NAME']) . '/download.php?file=' . urlencode($randomName);
 
     echo json_encode([
         'success' => true,

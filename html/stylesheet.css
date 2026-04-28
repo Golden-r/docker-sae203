@@ -164,3 +164,80 @@ button:hover {
     flex-direction: column;
     gap: 4px;
 }
+
+/* Auth bar */
+.auth-bar {
+    text-align: right;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.auth-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.auth-ok {
+    background: #e6ffed;
+    color: #22863a;
+}
+
+.auth-ko {
+    background: #ffeef0;
+    color: #d73a49;
+}
+
+.small-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+/* File item with actions */
+.file-item {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: bold;
+    color: #555;
+}
+
+.delete-btn {
+    background-color: #d32f2f;
+    padding: 8px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.delete-btn:hover {
+    background-color: #b71c1c;
+}
+
+.login-btn {
+    background-color: #ff9800;
+    padding: 8px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.login-btn:hover {
+    background-color: #f57c00;
+}

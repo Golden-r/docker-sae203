@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     const uploadResult = document.getElementById('upload-result');
     const fileList = document.getElementById('file-list');
+    const authStatus = document.getElementById('auth-status');
+
+    let isAuthenticated = false;
 
     // Load available files on page load
     loadFiles();
@@ -56,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 uploadResult.innerHTML = `
                     <div class="success-box">
                         <p><strong>Fichier envoyé avec succès !</strong></p>
-                        <p>Lien de téléchargement :</p>
+                        <p>Lien de téléchargement (nécessite une connexion) :</p>
                         <div class="link-box">
-                            <a href="${data.link}" target="_blank" download>${data.link}</a>
+                            <a href="${data.link}" target="_blank">${data.link}</a>
                             <button onclick="copyToClipboard('${data.link}')">Copier</button>
                         </div>
                     </div>
@@ -77,27 +80,105 @@ document.addEventListener('DOMContentLoaded', () => {
         fileList.innerHTML = '<li>Chargement...</li>';
 
         try {
-            const response = await fetch('files.php');
+            const response = await fetch('files.php', {
+                credentials: 'include'
+            });
             const data = await response.json();
 
-            if (data.success && data.files.length > 0) {
-                fileList.innerHTML = '';
-                data.files.forEach(file => {
-                    const sizeStr = formatBytes(file.size);
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <a href="${file.url}" download title="Télécharger ${file.name}">
-                            📄 ${file.name}
-                        </a>
-                        <span class="meta">${sizeStr} — ${file.date}</span>
-                    `;
-                    fileList.appendChild(li);
-                });
+            if (data.success) {
+                isAuthenticated = data.authenticated;
+                updateAuthStatus();
+
+                if (data.files.length > 0) {
+                    fileList.innerHTML = '';
+                    data.files.forEach(file => {
+                        const sizeStr = formatBytes(file.size);
+                        const li = document.createElement('li');
+                        li.className = 'file-item';
+
+                        if (isAuthenticated && file.url) {
+                            // Authentifié : lien de téléchargement + bouton supprimer
+                            li.innerHTML = `
+                                <div class="file-info">
+                                    <a href="${file.url}" title="Télécharger ${file.name}">
+                                        📄 ${file.name}
+                                    </a>
+                                    <span class="meta">${sizeStr} — ${file.date}</span>
+                                </div>
+                                <button class="delete-btn" data-file="${file.name}" title="Supprimer">
+                                    🗑️ Supprimer
+                                </button>
+                            `;
+                        } else {
+                            // Non authentifié : nom sans lien
+                            li.innerHTML = `
+                                <div class="file-info">
+                                    <span class="file-name">📄 ${file.name}</span>
+                                    <span class="meta">${sizeStr} — ${file.date}</span>
+                                </div>
+                                <button class="login-btn" onclick="promptLogin()" title="Se connecter pour télécharger">
+                                    🔒 Connexion
+                                </button>
+                            `;
+                        }
+                        fileList.appendChild(li);
+                    });
+
+                    // Attacher les événements de suppression
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const filename = e.target.dataset.file;
+                            deleteFile(filename);
+                        });
+                    });
+                } else {
+                    fileList.innerHTML = '<li>Aucun fichier disponible pour le moment.</li>';
+                }
             } else {
-                fileList.innerHTML = '<li>Aucun fichier disponible pour le moment.</li>';
+                fileList.innerHTML = '<li>Erreur lors du chargement des fichiers.</li>';
             }
         } catch (err) {
             fileList.innerHTML = `<li class="error">Impossible de charger la liste des fichiers.</li>`;
+        }
+    }
+
+    async function deleteFile(filename) {
+        if (!confirm(`Êtes-vous sûr de vouloir supprimer "${filename}" ?`)) {
+            return;
+        }
+
+        try {
+            const response = await fetch('delete.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ file: filename })
+            });
+
+            if (response.status === 401) {
+                alert('Vous devez être connecté pour supprimer un fichier.');
+                promptLogin();
+                return;
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                loadFiles(); // Refresh list
+            } else {
+                alert('Erreur : ' + (data.error || 'Échec de la suppression'));
+            }
+        } catch (err) {
+            alert('Erreur réseau : ' + err.message);
+        }
+    }
+
+    function updateAuthStatus() {
+        if (!authStatus) return;
+        if (isAuthenticated) {
+            authStatus.innerHTML = '<span class="auth-badge auth-ok">🔓 Connecté</span>';
+        } else {
+            authStatus.innerHTML = '<span class="auth-badge auth-ko">🔒 Non connecté</span> <button onclick="promptLogin()" class="small-btn">Se connecter</button>';
         }
     }
 
@@ -108,6 +189,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
+
+    // Expose promptLogin globally
+    window.promptLogin = function() {
+        // Déclencher l'authentification Basic en appelant un endpoint protégé
+        fetch('check_auth.php', { credentials: 'include' })
+            .then(response => {
+                if (response.status === 401) {
+                    // Le navigateur va afficher la popup d'authentification
+                    // Après auth, on recharge la liste
+                    setTimeout(loadFiles, 500);
+                } else if (response.ok) {
+                    loadFiles();
+                }
+            })
+            .catch(() => {
+                loadFiles();
+            });
+    };
 });
 
 function copyToClipboard(text) {
