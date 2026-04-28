@@ -2,13 +2,13 @@
 
 **Équipe V2 :**
 
+<div>
 - Rayan   AZAANOUNE   B2
-
 - Kyle    FOREST      B2
-
 - Alexis  WEY-RACADOT B2
-
 - Gabriel BEAUFILS    B2
+</div>
+
 
 
 **Année :** 2025-2026
