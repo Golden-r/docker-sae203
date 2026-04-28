@@ -5,10 +5,10 @@
 <div>
 
 <ul>
-  <li><pre>Rayan   AZAANOUNE   B2</pre>pre></li>
-  <li><pre>Kyle    FOREST      B2</pre>pre></li>
-  <li><pre>Alexis  WEY-RACADOT B2</pre>pre></li>
-  <li><pre>Gabriel BEAUFILS    B2</pre>pre></li>
+  <li><pre>Rayan   AZAANOUNE   B2</pre></li>
+  <li><pre>Kyle    FOREST      B2</pre></li>
+  <li><pre>Alexis  WEY-RACADOT B2</pre></li>
+  <li><pre>Gabriel BEAUFILS    B2</pre></li>
 </ul>
 </div>
 
