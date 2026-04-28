@@ -1,10 +1,10 @@
 # SAÉ 2.03 : SafeShare
 
 **Équipe V2 :**
-	* Rayan   AZAANOUNE   B2
-	* Kyle    FOREST      B2
-	* Alexis  WEY-RACADOT B2
-	* Gabriel BEAUFILS    B2
+	- Rayan   AZAANOUNE   B2
+	- Kyle    FOREST      B2
+	- Alexis  WEY-RACADOT B2
+	- Gabriel BEAUFILS    B2
 
 **Année :** 2025-2026
 
